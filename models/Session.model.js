@@ -1,17 +1,20 @@
 const { Schema, model } = require("mongoose");
+const User = require("./User.model");
 
 const userSchema = new Schema(
 
 {
 	X_id: {
-		type: String
+		type: ObjectId,
+		ref: Exercise,
 		require: true
 		 },
 	weight: String,
 	reps: String,
 	sets: String,
 	user_id: {
-		type: String
+		type: ObjectId,
+		ref: User,
 		require: true
 	},
 	timestamp: true
