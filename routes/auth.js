@@ -9,14 +9,14 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const { username, email, password } = req.body;
 
-  if (username === '') {
-    res.render('auth/signup', { message: 'Username cannot be empty' });
-    return;
-  }
+  // if (username === '') {
+  //   res.render('auth/signup', { message: 'Username cannot be empty' });
+  //   return;
+  // }
 
   if (password.length < 4) {
     res.render('auth/signup', {
-      message: 'Password has to be minimum 4 characters',
+      errorMessage: 'Password has to be minimum 4 characters',
     });
     return;
   }
@@ -28,20 +28,20 @@ router.post('/signup', (req, res, next) => {
     return;
   }
 
-  User.findOne({ username }).then((userFromDB) => {
+  User.findOne({ username }, { email }).then((userFromDB) => {
     console.log(userFromDB);
 
     if (userFromDB !== null) {
-      res.render('auth/signup', { message: 'Username is already taken' });
+      res.render('auth/signup', { errorMessage: 'Username is already taken' });
     } else {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
       console.log(hash);
 
-      User.create({ username: username, email: email, password: hash })
+      User.create({ username, email, password: hash })
         .then((createdUser) => {
           console.log(createdUser);
-          res.redirect('/auth/login');
+          res.redirect('users/userProfile');
         })
         .catch((err) => {
           next(err);
@@ -50,18 +50,20 @@ router.post('/signup', (req, res, next) => {
   });
 });
 //login code
-router.get('/auth/login', (req, res, next) => {
-  res.render('login');
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
 });
 
-router.post('/auth/login', (req, res, next) => {
-  const { username, password } = req.body;
+router.get('/userProfile', (req, res, next) => res.render('users/userProfile'));
+
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body;
 
   // Find user in database by username
-  User.findOne({ username }).then((userFromDB) => {
+  User.findOne({ email }).then((userFromDB) => {
     if (userFromDB === null) {
       // User not found in database => Show login form
-      res.render('login', { message: 'Wrong credentials' });
+      res.render('auth/login', { errorMessage: 'Wrong credentials' });
       return;
     }
 
@@ -71,7 +73,7 @@ router.post('/auth/login', (req, res, next) => {
       // Password is correct => Login user
       // req.session is an object provided by "express-session"
       req.session.user = userFromDB;
-      res.redirect('/profile');
+      res.redirect('/userProfile');
     } else {
       res.render('login', { message: 'Wrong credentials' });
       return;
