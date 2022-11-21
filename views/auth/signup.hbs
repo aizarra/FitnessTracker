@@ -1,0 +1,29 @@
+<div class='sign-container'>
+  <div class='sign-form-container'>
+    <h2>Sign up</h2>
+    <form class='sign-form' action='/signup' method='POST'>
+      <label>
+        Username
+        <input type='text' name='username' placeholder='new_user' />
+      </label>
+
+      <label>
+        Email
+        <input type='email' name='email' placeholder='new_user@newuser.com' />
+      </label>
+
+      <label>
+        Password
+        <input type='password' name='password' placeholder='********' />
+      </label>
+
+      <button class='btn submit-btn' type='submit'>Create account</button>
+
+      <p>Already have an account? <a href='/login'>Sign in</a></p>
+
+      {{#if errorMessage}}
+        <p class='error'>{{errorMessage}}</p>
+      {{/if}}
+    </form>
+  </div>
+</div>
