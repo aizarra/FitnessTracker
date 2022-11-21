@@ -44,11 +44,11 @@ router.post('/auth/signup', (req, res, next) => {
   });
 });
 //login code
-router.get("/auth/login", (req, res, next) => {
-  res.render("login")
+router.get("/login", (req, res, next) => {
+  res.render("auth/login")
 })
 
-router.post("/auth/login", (req, res, next) => {
+router.post("/login", (req, res, next) => {
   const { username, password } = req.body
 
   // Find user in database by username
@@ -56,7 +56,7 @@ router.post("/auth/login", (req, res, next) => {
     .then(userFromDB => {
       if (userFromDB === null) {
         // User not found in database => Show login form
-        res.render("login", { message: "Wrong credentials" })
+        res.render("auth/login", { message: "Wrong credentials" })
         return
       }
 
