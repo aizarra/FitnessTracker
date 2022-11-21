@@ -7,7 +7,7 @@ router.get('/auth/signup', (req, res, next) => {
 });
 
 router.post('/auth/signup', (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
 
   if (username === '') {
     res.render('signup', { message: 'Username cannot be empty' });
@@ -20,6 +20,13 @@ router.post('/auth/signup', (req, res, next) => {
     });
     return;
   }
+   if (!username || !email || !password) {
+     res.render('auth/signup', {
+       errorMessage:
+         'All fields are mandatory. Please provide your username, email and password.',
+     });
+     return;
+   }
 
   User.findOne({ username }).then((userFromDB) => {
     console.log(userFromDB);
