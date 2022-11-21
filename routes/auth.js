@@ -41,7 +41,7 @@ router.post('/signup', (req, res, next) => {
       User.create({ username, email, password: hash })
         .then((createdUser) => {
           console.log(createdUser);
-          res.redirect('users/userProfile');
+          res.redirect('/userProfile');
         })
         .catch((err) => {
           next(err);
@@ -63,7 +63,7 @@ router.post('/login', (req, res, next) => {
   User.findOne({ email }).then((userFromDB) => {
     if (userFromDB === null) {
       // User not found in database => Show login form
-      res.render('auth/login', { errorMessage: 'Wrong credentials' });
+      res.render('auth/login', { errorMessage: "The email doesn't exist" });
       return;
     }
 
@@ -72,10 +72,11 @@ router.post('/login', (req, res, next) => {
     if (bcrypt.compareSync(password, userFromDB.password)) {
       // Password is correct => Login user
       // req.session is an object provided by "express-session"
+
       req.session.user = userFromDB;
       res.redirect('/userProfile');
     } else {
-      res.render('login', { message: 'Wrong credentials' });
+      res.render('auth/login', { errorMessage: 'Wrong password' });
       return;
     }
   });
