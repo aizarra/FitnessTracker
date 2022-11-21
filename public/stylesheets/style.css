@@ -140,10 +140,10 @@ SUGNUP
   justify-content: center;
   align-items: center;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.8)
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
     ),
-    url('./index-img.jpg') center/cover fixed no-repeat;
+    url('/images/index-img.jpg') center/cover fixed no-repeat;
 }
 .sign-form-container {
   width: 50%;
