@@ -20,6 +20,10 @@
       <button class='btn submit-btn' type='submit'>Create account</button>
 
       <p>Already have an account? <a href='/login'>Sign in</a></p>
+
+      {{#if errorMessage}}
+        <p class='error'>{{errorMessage}}</p>
+      {{/if}}
     </form>
   </div>
 </div>
