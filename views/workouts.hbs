@@ -1,10 +1,15 @@
 <h1>EXERCISES</h1>
 
 
-
+<form action="/user/chosenExercises" method="POST">
 {{#each workouts}}
 <div>
-    <img src="{{gifUrl}} "></img>
+    <input type="checkbox" id="allWorkouts" value={{_id}} name="chosenExercise" />
+    {{!-- <img src="{{gifUrl}} "></img> --}}
     <h2>{{name}}</h2>
 </div>
 {{/each}}
+<div>
+    <button type="submit">SUBMIT</button>
+</div>
+</form>

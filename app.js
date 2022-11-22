@@ -48,11 +48,14 @@ app.use('/', indexRoutes);
 const authRoutes = require('./routes/auth.routes');
 app.use('/', authRoutes);
 
-const workoutsRoutes = require("./routes/workouts.routes")
-app.use("/", workoutsRoutes )
+const workoutsRoutes = require('./routes/workouts.routes');
+app.use('/', workoutsRoutes);
 
 const workouts = require('./routes/workouts.routes');
 app.use('/', workouts);
+
+const chosenExercises = require('./routes/chosenexercises.routes');
+app.use('/', chosenExercises);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
