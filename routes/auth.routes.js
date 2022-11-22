@@ -2,24 +2,22 @@ const router = require('express').Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 
+// GET REQUESTS
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
 
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
+});
+
+router.get('/userProfile', (req, res, next) => res.render('users/userProfile'));
+
+// POST REQUESTS
 router.post('/signup', (req, res, next) => {
   const { username, email, password } = req.body;
 
-  // if (username === '') {
-  //   res.render('auth/signup', { message: 'Username cannot be empty' });
-  //   return;
-  // }
-
-  if (password.length < 4) {
-    res.render('auth/signup', {
-      errorMessage: 'Password has to be minimum 4 characters',
-    });
-    return;
-  }
+  // validation
   if (!username || !email || !password) {
     res.render('auth/signup', {
       errorMessage:
@@ -27,12 +25,28 @@ router.post('/signup', (req, res, next) => {
     });
     return;
   }
+  if (password.length < 4) {
+    res.render('auth/signup', {
+      errorMessage: 'Password has to be minimum 4 characters',
+    });
+    return;
+  }
+  // if (username === '') {
+  //   res.render('auth/signup', { message: 'Username cannot be empty' });
+  //   return;
+  // }
 
-  User.findOne({ username }, { email }).then((userFromDB) => {
+  User.findOne({ username, email }).then((userFromDB) => {
     console.log(userFromDB);
-
-    if (userFromDB !== null) {
-      res.render('auth/signup', { errorMessage: 'Username is already taken' });
+    // validation => if the username exists
+    if (username !== null) {
+      res.render('auth/signup', {
+        errorMessage: 'Username is already taken',
+      });
+    } else if (email !== null) {
+      res.render('auth/signup', {
+        errorMessage: 'Email is already taken',
+      });
     } else {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
@@ -49,12 +63,6 @@ router.post('/signup', (req, res, next) => {
     }
   });
 });
-//login code
-router.get('/login', (req, res, next) => {
-  res.render('auth/login');
-});
-
-router.get('/userProfile', (req, res, next) => res.render('users/userProfile'));
 
 router.post('/login', (req, res, next) => {
   const { email, password } = req.body;

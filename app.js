@@ -45,8 +45,11 @@ app.use(
 const indexRoutes = require('./routes/index.routes');
 app.use('/', indexRoutes);
 
-const auth = require('./routes/auth');
-app.use('/', auth);
+const authRoutes = require('./routes/auth.routes');
+app.use('/', authRoutes);
+
+const workoutsRoutes = require("./routes/workouts.routes")
+app.use("/", workoutsRoutes )
 
 const workouts = require('./routes/workouts.routes');
 app.use('/', workouts);
