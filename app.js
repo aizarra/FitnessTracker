@@ -48,6 +48,9 @@ app.use('/', indexRoutes);
 const auth = require('./routes/auth');
 app.use('/', auth);
 
+const workouts = require('./routes/workouts.routes');
+app.use('/', workouts);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
 
