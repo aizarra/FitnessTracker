@@ -318,7 +318,7 @@ ADD WORKOUT
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url('addworkout-img.jpg') center/cover fixed no-repeat;
+    url('/images/addworkout-img.jpg') center/cover fixed no-repeat;
 }
 .exercises-container {
   justify-content: flex-start;
