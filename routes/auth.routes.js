@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
+const { isLoggedIn } = require('../middleware/route-guard.js');
 
 // GET REQUESTS
 router.get('/signup', (req, res, next) => {
@@ -11,7 +12,9 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
 
-router.get('/userProfile', (req, res, next) => res.render('users/userProfile'));
+router.get('/userProfile', isLoggedIn, (req, res, next) => {
+  res.render('users/userProfile');
+});
 
 // POST REQUESTS
 router.post('/signup', (req, res, next) => {
@@ -20,8 +23,7 @@ router.post('/signup', (req, res, next) => {
   // validation
   if (!username || !email || !password) {
     res.render('auth/signup', {
-      errorMessage:
-        'All fields are mandatory. Please provide your username, email and password.',
+      errorMessage: 'All fields are mandatory.',
     });
     return;
   }
@@ -31,21 +33,13 @@ router.post('/signup', (req, res, next) => {
     });
     return;
   }
-  // if (username === '') {
-  //   res.render('auth/signup', { message: 'Username cannot be empty' });
-  //   return;
-  // }
 
-  User.findOne({ username, email }).then((userFromDB) => {
+  User.findOne({ username }).then((userFromDB) => {
     console.log(userFromDB);
     // validation => if the username exists
-    if (username !== null) {
+    if (userFromDB !== null) {
       res.render('auth/signup', {
         errorMessage: 'Username is already taken',
-      });
-    } else if (email !== null) {
-      res.render('auth/signup', {
-        errorMessage: 'Email is already taken',
       });
     } else {
       const salt = bcrypt.genSaltSync();
@@ -69,9 +63,9 @@ router.post('/login', (req, res, next) => {
 
   // Find user in database by username
   User.findOne({ email }).then((userFromDB) => {
-    if (userFromDB === null) {
+    if (!userFromDB) {
       // User not found in database => Show login form
-      res.render('auth/login', { errorMessage: "The email doesn't exist" });
+      res.render('auth/login', { errorMessage: 'The email is not registered' });
       return;
     }
 
@@ -81,7 +75,7 @@ router.post('/login', (req, res, next) => {
       // Password is correct => Login user
       // req.session is an object provided by "express-session"
 
-      req.session.user = userFromDB;
+      req.session.currentUser = userFromDB;
       res.redirect('/userProfile');
     } else {
       res.render('auth/login', { errorMessage: 'Wrong password' });
@@ -90,10 +84,9 @@ router.post('/login', (req, res, next) => {
   });
 });
 
-router.get('/auth/logout', (req, res, next) => {
+router.post('/logout', (req, res, next) => {
   // Logout user
-  req.session.destroy();
-  res.redirect('/');
+  req.session.destroy(() => res.redirect('/'));
 });
 
 module.exports = router;
