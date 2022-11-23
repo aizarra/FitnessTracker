@@ -2,12 +2,13 @@
   <section class='profile-info-section'>
     <div class='profile-info-container'>
       <div class='profile-info'>
-        <img src='/images/profile-pic-test.jpg' alt='profile pic' />
+        <img src='/images/profile-pic-test.png' alt='profile pic' />
         <div class='userdata'>
-          <h2>Username: ...</h2>
-          <h2>Email: ...</h2>
+          <h2>Username: {{user.username}}</h2>
+          <h2>Email: {{user.email}}</h2>
         </div>
-        <a class='update-btn profile-btn' href='#'>Update your profile</a>
+        <a class='update-btn profile-btn' href='/updateProfile'>Update your
+          profile</a>
       </div>
 
       <form action='/logout' method='post'>
