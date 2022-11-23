@@ -198,6 +198,7 @@ SUGNUP
   border: none;
   color: var(--clr-light);
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 .sign-form p a {
   color: var(--clr-dark);
@@ -280,6 +281,7 @@ USER PROFILE
   background: #fd1700;
   border: none;
   color: var(--clr-white);
+  cursor: pointer;
 }
 
 /* workouts-section */
