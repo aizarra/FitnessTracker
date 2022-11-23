@@ -1,15 +1,11 @@
-{{!-- <h1>TRACKER</h1>
+<h1>TRACKER</h1>
 
 
-<form action="/user/chosenExercises" method="POST">
-    {{#each workouts}}
+    <h2>{{user}}</h2>
     <div>
-        <input type="checkbox" id="allWorkouts" value={{_id}} name="chosenExercise" />
-        {{!-- <img src="{{gifUrl}} "></img> --}}
-        <h2>{{name}}</h2>
+        {{#each chosenExercise}}
+        <h2>{{this}}</h2>
+        {{/each}}
     </div>
-    {{/each}}
-    <div>
-        <button type="submit">SUBMIT</button>
-    </div>
-</form> --}}
+
+  
