@@ -10,6 +10,8 @@ router.get('/user/tracker', (req, res, next) => {
       model: 'Exercise',
     })
     .then((user) => {
+      console.log(user);
       res.render('tracker', { user });
     });
 });
+module.exports = router;
