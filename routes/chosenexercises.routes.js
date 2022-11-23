@@ -2,26 +2,26 @@ const router = require('express').Router();
 const { isLoggedIn } = require('../middleware/route-guard');
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
+const Exercise = require('../models/Exercise.model');
 
 router.post('/user/chosenExercises', (req, res, next) => {
-  console.log(req.body);
-  const newArray = [];
-  req.body.chosenExercise.forEach((exercise) => {
-    newArray.push(mongoose.Types.ObjectId(exercise));
+  console.log('request', req.body.chosenExercise);
+  const exercises = req.body.chosenExercise;
+  const exercisesObjectId = exercises.map((exercise) => {
+    console.log('exercise', exercise);
+    const XR = mongoose.Types.ObjectId(exercise);
+    console.log('XR', XR);
+    return XR;
   });
-  console.log('newarray2', newArray);
+  console.log('XT', exercisesObjectId);
   User.findByIdAndUpdate(
     req.session.user._id,
-    { $push: { chosenExercise: { $each: newArray } } },
-    { safe: true, upsert: true, new: true }
-  )
-    .then(() => {
-      return User.findById(req.session.user._id);
-    })
-    .then((users) => {
-      console.log('newupdated', users);
-      res.render('tracker', users);
-    });
+    { chosenExercise: exercisesObjectId },
+    { new: true }
+  ).then((users) => {
+    console.log('newupdated', users);
+    res.render('tracker', users);
+  });
 });
 
 module.exports = router;

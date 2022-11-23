@@ -22,11 +22,9 @@ const userSchema = new Schema(
     },
     chosenExercise: [
       {
-        exercises_id: {
-          type: Schema.Types.ObjectId,
-          ref: 'Exercise',
-          require: true,
-        },
+        type: Schema.Types.ObjectId,
+        ref: 'Exercise',
+        require: true,
       },
     ],
   },
