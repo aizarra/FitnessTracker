@@ -3,11 +3,11 @@ const router = express.Router();
 
 const Exercise = require('../models/Exercise.model');
 
-router.get('/workouts', (req, res, next) => {
+router.get('/addWorkout', (req, res, next) => {
   Exercise.find()
     .then((allTheExercisesFromDB) => {
       // console.log('Retrieved exercises from DB:', allTheExercisesFromDB);
-      res.render('workouts.hbs', {
+      res.render('exercises/addWorkout.hbs', {
         workouts: allTheExercisesFromDB,
       });
     })
