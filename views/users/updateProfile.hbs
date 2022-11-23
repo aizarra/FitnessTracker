@@ -1,0 +1,32 @@
+<div class='sign-container update-user-container'>
+  <div class='sign-form-container'>
+    <h2>Update your profile</h2>
+    <form class='sign-form' action='/updateProfile' method='POST'>
+
+      <label for='newUsername'>
+        New username
+        <input
+          type='text'
+          placeholder='Add new username'
+          name='newUsername'
+          id='newUsername'
+        />
+      </label>
+      <label for='newPassword'>
+        New password
+        <input
+          type='password'
+          placeholder='Add new password'
+          name='newPassword'
+          id='newPassword'
+        />
+      </label>
+
+      <button class='btn submit-btn' type='submit'>Update your profile</button>
+
+      {{#if errorMessage}}
+        <p class='error'>{{errorMessage}}</p>
+      {{/if}}
+    </form>
+  </div>
+</div>

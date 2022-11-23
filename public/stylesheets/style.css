@@ -307,6 +307,17 @@ USER PROFILE
 }
 
 /* =============
+UPDATE USER
+================ */
+.update-user-container {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/images/update-user-img.jpg') center/cover fixed no-repeat;
+}
+
+/* =============
 ADD WORKOUT
 ================ */
 .add-workout-page {
