@@ -9,6 +9,9 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.redirect('/user/userProfile');
+  }
   res.render('auth/login');
 });
 
