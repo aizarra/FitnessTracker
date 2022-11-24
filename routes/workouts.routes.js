@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Exercise = require('../models/Exercise.model');
 
-router.get('/addWorkout', (req, res, next) => {
+router.get('/user/addWorkout', (req, res, next) => {
   Exercise.find()
     .then((allTheExercisesFromDB) => {
       // console.log('Retrieved exercises from DB:', allTheExercisesFromDB);

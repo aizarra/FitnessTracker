@@ -1,16 +1,71 @@
 <h1>EXERCISES</h1>
 
+<form action='/user/chosenExercises' method='POST'>
+  {{#each workouts}}
+    <div>
+      <input
+        type='checkbox'
+        id='allWorkouts'
+        value={{_id}}
+        name='chosenExercise'
+      />
+      {{!-- <img src="{{gifUrl}} "></img> --}}
+      <h2>{{name}}</h2>
 
-<form action="/user/chosenExercises" method="POST">
-{{#each workouts}}
-<div>
-    <input type="checkbox" id="allWorkouts" value={{_id}} name="chosenExercise" />
-    {{!-- <img src="{{gifUrl}} "></img> --}}
-    <h2>{{name}}</h2>
-    
-</div>
-{{/each}}
-<div>
-    <button type="submit">SUBMIT</button>
-</div>
+    </div>
+  {{/each}}
+  <div>
+    <button type='submit'>SUBMIT</button>
+  </div>
 </form>
+<main class='add-workout-page tracker-page'>
+  <div
+    class='sign-form-container exercises-container workout-session-container'
+  >
+    <h2>Workout tracker</h2>
+    <form action='/wosessions' method='POST' class='workout-session'>
+      <div class='tracker-exercises'>
+        {{#each currentUser.chosenExercise}}
+          <div class='tracker-single-exercise'>
+            <label>{{name}}</label>
+            <input
+              placeholder='Weight'
+              type='number'
+              id='weight'
+              name='`weight${weight}`'
+              required
+              minlength='0'
+              maxlength='3'
+              size='10'
+            />
+            <input
+              placeholder='Reps'
+              type='number'
+              id='reps'
+              name='`reps${reps}`'
+              required
+              minlength='0'
+              maxlength='3'
+              size='10'
+            />
+            <input
+              placeholder='Sets'
+              type='number'
+              id='setst'
+              name='`sets${sets}`'
+              required
+              minlength='0'
+              maxlength='3'
+              size='10'
+            />
+          </div>
+
+        {{/each}}
+      </div>
+
+      <button class='submit-workout-btn' type='submit'>Add a workout</button>
+
+    </form>
+  </div>
+
+</main>
