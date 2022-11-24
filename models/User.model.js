@@ -27,6 +27,17 @@ const userSchema = new Schema(
         require: true,
       },
     ],
+    wosession: [
+      {
+        name: String,
+        weight: Number,
+        reps: Number,
+        sets: Number,
+        // type: Schema.Types.ObjectId,
+        // ref: 'wosession',
+        // require: true,
+      },
+    ],
   },
   {
     timestamps: true,
