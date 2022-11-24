@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 const Exercise = require('../models/Exercise.model');
 
 router.post('/user/chosenExercises', (req, res, next) => {
-  console.log('request', req.body.chosenExercise);
-  console.log(req.body);
+  console.log('BODY: ', req.body);
   const exercises = req.body.chosenExercise;
   const exercisesObjectId = exercises.map((exercise) => {
     const XR = mongoose.Types.ObjectId(exercise);

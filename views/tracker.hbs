@@ -41,10 +41,10 @@
 <form action="/wosessions" method="POST">
 {{#each currentUser.chosenExercise}}
 <h2>{{name}}</h2>
-<input type="String" id="name" name=`"name" + {{name}}` value={{name}} required minlength="0" maxlength="3" size="30" />
-<input type="number" id="weight" name=`weight${weight}` required minlength="0" maxlength="3" size="10" />
-<input type="number" id="reps" name=`reps${reps}` required minlength="0" maxlength="3" size="10" />
-<input type="number" id="setst" name=`sets${sets}` required minlength="0" maxlength="3" size="10" />
+<input type="String" id="name" name="name" value={{name}} required minlength="0" maxlength="3" size="30" />
+<input type="number" id="weight" name="weight" required minlength="0" maxlength="3" size="10" />
+<input type="number" id="reps" name="reps" required minlength="0" maxlength="3" size="10" />
+<input type="number" id="setst" name="sets" required minlength="0" maxlength="3" size="10" />
 
 {{/each}}
 <button type="submit">Submit</button>
