@@ -12,21 +12,22 @@ router.post('/wosessions', (req, res, next) => {
   let wosession = [];
   for (let i = 0; i < req.body.name.length; i++) {
     let obj = {
+      user_id: mongoose.Types.ObjectId(currentUserId),
       name: req.body.name[i],
       weight: req.body.weight[i],
       reps: req.body.weight[i],
       sets: req.body.sets[i],
     };
 
-    wosession.push(...obj, { user_id: currentUserId });
+    wosession.push(obj);
   }
 
   console.log('newArray: ', wosession);
 
   //   const wosessionObjectId = mongoose.Types.ObjectId(woentry);
-  Wosession.insertMany({ wosession }).then((currentObj) => {
+  Wosession.insertMany(wosession).then((currentObj) => {
     console.log(currentObj);
-    res.render('profiletemp', { currentObj });
+    res.render('profiletemp', { wosession: currentObj });
   });
 });
 
