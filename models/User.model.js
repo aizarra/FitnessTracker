@@ -27,14 +27,14 @@ const userSchema = new Schema(
         require: true,
       },
     ],
-    wosession: [
-      {
-        name: String,
-        weight: Number,
-        reps: Number,
-        sets: Number,
-      },
-    ],
+    //   wosession: [
+    //     {
+    //       name: String,
+    //       weight: Number,
+    //       reps: Number,
+    //       sets: Number,
+    //     },
+    //   ],
   },
   {
     timestamps: true,
