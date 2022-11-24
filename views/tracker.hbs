@@ -11,32 +11,6 @@
 
 <h1>TRACKER</h1>
 
-{{!-- <form action="/wosessions" method="POST">
-<table>
-   <tr>
-    <th scope="col">Exercise</th>
-    <th scope="col">Weight</th>
-    <th scope="col">Reps</th>
-    <th scope="col">Sets</th>
-   </tr>
-
-    <tr>
-    <th scope="row"></th>
-    <td>
-        {{#each currentUser.chosenExercise}}
-        <h2>{{name}}</h2>
-<input type="number" id="weight" name=`weight${weight}` required minlength="0" maxlength="3" size="10"/>
-<input type="number" id="weight" name=`reps${reps}` required minlength="0" maxlength="3" size="10" />
-<input type="number" id="weight" name=`sets${sets}` required minlength="0" maxlength="3" size="10" />
-        {{/each}}
-    </td>
-    </tr>
-
-    <tr>
-<td></td>
-
-
-</form> --}}
 
 <form action="/wosessions" method="POST">
 {{#each currentUser.chosenExercise}}
