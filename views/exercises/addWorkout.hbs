@@ -15,7 +15,9 @@
             <select name='targets' id='targets' placeholder='Muscle'>
               <option value='' disabled selected>Select muscle</option>
               <option value='all'>All</option>
-              <option value='abs'>Abs</option>
+              {{#each targets}}
+               <option value={{this}}>{{this}}</option>
+              {{/each}}
             </select>
           </div>
           <div class='select-btn'>
@@ -23,7 +25,9 @@
             <select name='equipment' id='equipment'>
               <option value='' disabled selected>Select equipment</option>
               <option value='all'>All</option>
-              <option value='olympicBarbell'>Olympic barbell</option>
+              {{#each machines}}
+               <option value={{this}}>{{this}}</option>
+              {{/each}}
             </select>
           </div>
         </div>
