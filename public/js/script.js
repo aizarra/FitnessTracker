@@ -15,7 +15,7 @@ navItemBtns.forEach((navItemBtn) => {
     navItemBtns.forEach((btn) => {
       btn.classList.remove('active');
     });
-    e.currentTarget.classList.add('active');
+    e.target.classList.add('active');
   });
 });
 

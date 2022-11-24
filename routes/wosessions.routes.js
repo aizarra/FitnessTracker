@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { isLoggedIn } = require('../middleware/route-guard');
 const User = require('../models/User.model');
 const mongoose = require('mongoose');
-const Wosession = require('../models/Wosession.model');
+const Wosession = require('../models/WOSession.model');
 
 router.post('/wosessions', (req, res, next) => {
   console.log('request', req.body);

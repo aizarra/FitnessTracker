@@ -46,7 +46,7 @@ router.post('/signup', (req, res, next) => {
       User.create({ username, email, password: hash })
         .then((userFromDB) => {
           req.session.currentUser = userFromDB;
-          res.redirect('/userProfile');
+          res.redirect('/user/userProfile');
         })
         .catch((err) => {
           next(err);
@@ -73,7 +73,7 @@ router.post('/login', (req, res, next) => {
       // req.session is an object provided by "express-session"
 
       req.session.currentUser = userFromDB;
-      res.redirect('/userProfile');
+      res.redirect('/user/userProfile');
     } else {
       res.render('auth/login', { errorMessage: 'Wrong password' });
       return;
