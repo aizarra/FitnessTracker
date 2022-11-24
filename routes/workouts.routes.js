@@ -3,12 +3,27 @@ const router = express.Router();
 
 const Exercise = require('../models/Exercise.model');
 
-router.get('/workouts', (req, res, next) => {
+router.get('/user/addWorkout', (req, res, next) => {
   Exercise.find()
     .then((allTheExercisesFromDB) => {
-      // console.log('Retrieved exercises from DB:', allTheExercisesFromDB);
-      res.render('workouts.hbs', {
+      const uniqueTargetArray = [
+        ...new Set(
+          allTheExercisesFromDB.map((exercise) => {
+            return exercise.target;
+          })
+        ),
+      ];
+      const uniqueEquipmentArray = [
+        ...new Set(
+          allTheExercisesFromDB.map((exercise) => {
+            return exercise.equipment;
+          })
+        ),
+      ];
+      res.render('exercises/addWorkout.hbs', {
         workouts: allTheExercisesFromDB,
+        targets: uniqueTargetArray,
+        machines: uniqueEquipmentArray,
       });
     })
     .catch((error) => {

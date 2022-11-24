@@ -1,75 +1,63 @@
 <main class='add-workout-page'>
   <div class='sign-form-container exercises-container'>
     <h2>Exercises</h2>
-    <form class='search-form'>
-      <input
-        class='exercise-search'
-        type='text'
-        placeholder='Search for an exercise'
-      />
-      <div class='select-btns'>
-        <div class='select-btn'>
-          <label for='targets'></label>
-          <select name='targets' id='targets' placeholder='Muscle'>
-            <option value='' disabled selected>Select muscle</option>
-            <option value='all'>All</option>
-            <option value='abs'>Abs</option>
-            {{! <option value='Lats'>Lats</option>
-            <option value='calves'>Calves</option>
-            <option value='quads'>Quads</option>
-            <option value='pectorals'>Pectorals</option>
-            <option value='glutes'>Glutes</option>
-            <option value='hamstrings'>Hamstrings</option>
-            <option value='adductors'>Adductors</option>
-            <option value='triceps'>Triceps</option>
-            <option value='cardiovascularSystem'>
-              Cardiovascular system
-            </option> }}
-          </select>
-        </div>
-        <div class='select-btn'>
-          <label for='equipment'></label>
-          <select name='equipment' id='equipment'>
-            <option value='' disabled selected>Select equipment</option>
-            <option value='all'>All</option>
-            <option value='olympicBarbell'>Olympic barbell</option>
-            {{! <option value='resistenceBand'>Resistence band</option>
-            <option value='rope'>Rope</option>
-            <option value='sledMachine'>Sled machine</option>
-            <option value='smithMachine'>Smith machine</option>
-            <option value='tire'>Tire</option>
-            <option value='barbell'>Barbell</option>
-            <option value='bodyWeight'>Body weight</option>
-            <option value='assisted'>Assisted</option> }}
-          </select>
-        </div>
-      </div>
-    </form>
+    <div class='exercises-container-forms'>
 
-    <form
-      class='all-exercises-form'
-      action='/user/chosenExercises'
-      method='POST'
-    >
-      {{#each workouts}}
-        <div class='single-exercise'>
-          {{!-- <img src="{{gifUrl}} "></img> --}}
-          <h2>{{name}}</h2>
-          <input
-            type='checkbox'
-            id='allWorkouts'
-            value={{_id}}
-            name='chosenExercise'
-          />
+      <form class='search-form'>
+        <input
+          class='exercise-search'
+          type='text'
+          placeholder='Search for an exercise'
+        />
+        <div class='select-btns'>
+          <div class='select-btn'>
+            <label for='targets'></label>
+            <select name='targets' id='targets' placeholder='Muscle'>
+              <option value='' disabled selected>Select muscle</option>
+              <option value='all'>All</option>
+              {{#each targets}}
+               <option value={{this}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class='select-btn'>
+            <label for='equipment'></label>
+            <select name='equipment' id='equipment'>
+              <option value='' disabled selected>Select equipment</option>
+              <option value='all'>All</option>
+              {{#each machines}}
+               <option value={{this}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
         </div>
-      {{/each}}
-      <div>
-        <button
-          type='submit'
-          class='workout-submit-btn workout-btn'
-        >Submit</button>
-      </div>
-    </form>
+      </form>
+
+      <form
+        class='all-exercises-form'
+        action='/user/chosenExercises'
+        method='POST'
+      >
+        <div class='all-exercises'>
+          {{#each workouts}}
+            <div class='single-exercise'>
+              <img src="{{gifUrl}} "></img>
+              <h2>{{name}}</h2>
+              <input
+                type='checkbox'
+                id='allWorkouts'
+                value={{_id}}
+                name='chosenExercise'
+              />
+            </div>
+          {{/each}}
+        </div>
+
+        <button type='submit' class='workout-submit-btn workout-btn'>Add
+          exercises</button>
+
+      </form>
+    </div>
 
   </div>
 </main>

@@ -51,8 +51,8 @@ app.use('/', indexRoutes);
 const authRoutes = require('./routes/auth.routes');
 app.use('/', authRoutes);
 
-// const workouts = require('./routes/workouts.routes');
-// app.use('/', workouts);
+const userRoutes = require('./routes/user.routes');
+app.use('/', userRoutes);
 
 const chosenExercises = require('./routes/chosenexercises.routes');
 app.use('/', chosenExercises);

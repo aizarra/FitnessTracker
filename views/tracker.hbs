@@ -1,25 +1,63 @@
-{{!-- 
-<h1>TRACKER</h1>
+<main class='add-workout-page tracker-page'>
+  <div
+    class='sign-form-container exercises-container workout-session-container'
+  >
+    <h2>Workout tracker</h2>
+    <form action='/wosessions' method='POST' class='workout-session'>
+      <div class='tracker-exercises'>
+        {{#each currentUser.chosenExercise}}
+          <div class='tracker-single-exercise'>
+            <label>{{name}}</label>
+            <div class='tracker-single-exercise-inputs'>
+              <input
+                type='text'
+                id='name'
+                name='name'
+                value={{name}}
+                required
+                minlength='0'
+                maxlength='3'
+                size='30'
+              />
+              <input
+                placeholder='Weight'
+                type='number'
+                id='weight'
+                name='weight'
+                required
+                minlength='0'
+                maxlength='3'
+                size='10'
+              />
+              <input
+                placeholder='Reps'
+                type='number'
+                id='reps'
+                name='reps'
+                required
+                minlength='0'
+                maxlength='3'
+                size='10'
+              />
+              <input
+                placeholder='Sets'
+                type='number'
+                id='sets'
+                name='sets'
+                required
+                minlength='0'
+                maxlength='3'
+                size='10'
+              />
+            </div>
+          </div>
 
+        {{/each}}
+      </div>
 
-<div>
-    {{#each currentUser.chosenExercise}}
-    <h2>{{name}}</h2>
-    <img src="{{gifUrl}}" />
-    {{/each}}
-</div> --}}
+      <button class='submit-workout-btn' type='submit'>Add a workout</button>
 
-<h1>TRACKER</h1>
+    </form>
+  </div>
 
-
-<form action="/wosessions" method="POST">
-{{#each currentUser.chosenExercise}}
-<h2>{{name}}</h2>
-<input type="String" id="name" name="name" value={{name}} required minlength="0" maxlength="3" size="30" />
-<input type="number" id="weight" name="weight" required minlength="0" maxlength="3" size="10" />
-<input type="number" id="reps" name="reps" required minlength="0" maxlength="3" size="10" />
-<input type="number" id="setst" name="sets" required minlength="0" maxlength="3" size="10" />
-
-{{/each}}
-<button type="submit">Submit</button>
-</form>
+</main>

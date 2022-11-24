@@ -2,13 +2,18 @@
   <section class='profile-info-section'>
     <div class='profile-info-container'>
       <div class='profile-info'>
-        <img src='/images/profile-pic-test.jpg' alt='profile pic' />
+        <img src='/images/profile-pic-test.png' alt='profile pic' />
         <div class='userdata'>
-          <h2>Username: ...</h2>
-          <h2>Email: ...</h2>
+          <h2>Username: {{user.username}}</h2>
+          <h2>Email: {{user.email}}</h2>
         </div>
-        <a class='update-btn profile-btn' href='#'>Update your profile</a>
+        <a class='update-btn profile-btn' href='/user/updateProfile'>Update your
+          profile</a>
       </div>
+
+      <form action='/user/deleteProfile' method='post'>
+        <button class='delete-btn profile-btn'>Delete profile</button>
+      </form>
 
       <form action='/logout' method='post'>
         <button class='logout-btn profile-btn'>Logout</button>
@@ -18,6 +23,7 @@
 
   <section class='workouts-section'>
     <h1>My workouts</h1>
-    <a class='profile-btn add-workout-btn' href='/addWorkout'>+ Add a workout</a>
+    <a class='profile-btn add-workout-btn' href='/user/addWorkout'>+ Add a
+      workout</a>
   </section>
 </main>

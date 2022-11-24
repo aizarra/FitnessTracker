@@ -9,11 +9,10 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.redirect('/user/userProfile');
+  }
   res.render('auth/login');
-});
-
-router.get('/userProfile', isLoggedIn, (req, res, next) => {
-  res.render('users/userProfile');
 });
 
 // POST REQUESTS
@@ -35,7 +34,6 @@ router.post('/signup', (req, res, next) => {
   }
 
   User.findOne({ username }).then((userFromDB) => {
-    console.log(userFromDB);
     // validation => if the username exists
     if (userFromDB !== null) {
       res.render('auth/signup', {
@@ -44,11 +42,10 @@ router.post('/signup', (req, res, next) => {
     } else {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(password, salt);
-      console.log(hash);
 
       User.create({ username, email, password: hash })
-        .then((createdUser) => {
-          console.log(createdUser);
+        .then((userFromDB) => {
+          req.session.currentUser = userFromDB;
           res.redirect('/userProfile');
         })
         .catch((err) => {
