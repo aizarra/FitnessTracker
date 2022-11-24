@@ -277,10 +277,16 @@ USER PROFILE
   background: var(--clr-light);
   color: var(--clr-dark);
 }
-.logout-btn {
+.delete-btn {
   background: #fd1700;
   border: none;
   color: var(--clr-white);
+  cursor: pointer;
+}
+.logout-btn {
+  background: var(--clr-white);
+  border: none;
+  color: var(--clr-secondary);
   cursor: pointer;
 }
 
