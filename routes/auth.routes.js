@@ -12,20 +12,6 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
 
-router.get('/userProfile', isLoggedIn, (req, res, next) => {
-  User.findById(req.session.currentUser._id)
-    .then((user) => {
-      res.render('users/userProfile', { user });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-router.get('/updateProfile', (req, res, next) => {
-  res.render('users/updateProfile');
-});
-
 // POST REQUESTS
 router.post('/signup', (req, res, next) => {
   const { username, email, password } = req.body;
@@ -90,56 +76,6 @@ router.post('/login', (req, res, next) => {
       return;
     }
   });
-});
-
-router.post('/updateProfile', (req, res, next) => {
-  const { newUsername, newPassword } = req.body;
-
-  if (newUsername === '' && newPassword === '') {
-    res.redirect('/userProfile');
-  } else if (newUsername !== '' && newPassword !== '') {
-    const salt = bcrypt.genSaltSync();
-    const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
-    User.findByIdAndUpdate(
-      req.session.currentUser._id,
-      {
-        username: newUsername,
-        password: hashedNewPassword,
-      },
-      { new: true }
-    )
-      .then(() => {
-        res.redirect('/userProfile');
-      })
-      .catch((err) => console.log(err));
-  } else if (newPassword !== '' && newUsername === '') {
-    const salt = bcrypt.genSaltSync();
-    const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
-
-    User.findByIdAndUpdate(
-      req.session.currentUser._id,
-      {
-        password: hashedNewPassword,
-      },
-      { new: true }
-    )
-      .then(() => {
-        res.redirect('/userProfile');
-      })
-      .catch((err) => console.log(err));
-  } else if (newUsername !== '' && newPassword === '') {
-    User.findByIdAndUpdate(
-      req.session.currentUser._id,
-      {
-        username: newUsername,
-      },
-      { new: true }
-    )
-      .then(() => {
-        res.redirect('/userProfile');
-      })
-      .catch((err) => console.log(err));
-  }
 });
 
 router.post('/logout', (req, res, next) => {

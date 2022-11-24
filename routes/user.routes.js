@@ -61,7 +61,7 @@ router.post('/user/updateProfile', (req, res, next) => {
       { new: true }
     )
       .then(() => {
-        res.redirect('/user/userProfile');
+        res.redirect('/userProfile');
       })
       .catch((err) => console.log(err));
   }
