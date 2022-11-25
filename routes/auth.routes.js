@@ -5,6 +5,9 @@ const { isLoggedIn } = require('../middleware/route-guard.js');
 
 // GET REQUESTS
 router.get('/signup', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.redirect('/user/userProfile');
+  }
   res.render('auth/signup');
 });
 
